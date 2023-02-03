@@ -15,7 +15,16 @@ class TeacherController extends AbstractController
             'controller_name' => 'TeacherController',
         ]);
     }
-    public function showTeacher(string $name){
-        return $name;
+    #[Route('/showTeacher/{name}', name: 'show_teacher')]
+    public function showTeacher($name): Response
+    {
+        return $this->render('teacher/showTeacher.html.twig', [
+            'name' => $name,
+        ]);
+    }
+    #[Route('/goToIndex', name: 'goToIndex')]
+    public function goToIndex()
+    {
+        return $this->RedirectToRoute('app_student');
     }
 }
