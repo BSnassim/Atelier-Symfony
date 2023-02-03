@@ -11,9 +11,11 @@ class TeacherController extends AbstractController
     #[Route('/teacher', name: 'app_teacher')]
     public function index(): Response
     {
-        $age=55;
         return $this->render('teacher/index.html.twig', [
-            'controller_name' => $age,  'name' => 'ali'
+            'controller_name' => 'TeacherController',
         ]);
+    }
+    public function showTeacher(string $name){
+        return $name;
     }
 }
