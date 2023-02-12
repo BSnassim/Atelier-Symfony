@@ -1,0 +1,10 @@
+{% for f in formations %}
+<b>ref : </b>{{ f.ref }}<br>
+<b>Titre :</b> {{ f.Titre |upper}}<br>
+<b>Description :</b> {{ f.Description }}<br>
+<b>date_debut :</b> {{ f.date_debut }}<br>
+<b>date_fin :</b> {{ f.date_fin }}<br>
+<b>nb_participants :</b> {{ f.nb_participants }}<br>
+--------------------------------------<br>
+{% endfor %}
+Le nombre des formations est :{{formations|length}}
