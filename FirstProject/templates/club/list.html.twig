@@ -4,7 +4,46 @@
 <b>Description :</b> {{ f.Description }}<br>
 <b>date_debut :</b> {{ f.date_debut }}<br>
 <b>date_fin :</b> {{ f.date_fin }}<br>
-<b>nb_participants :</b> {{ f.nb_participants }}<br>
+<b>nb_participants :</b> {{ f.nb_participants }} 
+{% if f.nb_participants == 0 %}
+    <a href="{{ path('app_club_detail',{'name': f.Titre})}}"><button>Participer</button></a>
+{% endif %}
+<br>
 --------------------------------------<br>
 {% endfor %}
-Le nombre des formations est :{{formations|length}}
+<h4>Le nombre des formations est :{{formations|length}} </h4>
+<h4>Les titres des formations theoriques :</h4>
+{% for i in formations %}
+    {% if i.Description == 'formation theorique' %}
+        {{ i.Titre }}/
+    {% endif %}
+{% endfor %}
+<br>
+
+{% set maxindex = 0 %}
+{% set maxvalue = 0 %}
+{% set maxFormation = "" %}
+{% set j = 0 %}
+
+{% for i in formations %}
+    {% if i.nb_participants > maxvalue %}
+        {% set maxvalue = i.nb_participants %}
+        {% set maxindex = j %}
+        {% set maxFormation = i.Titre %}
+    {% endif %}
+    {% set j = j + 1 %}
+{% endfor %}
+<h4>
+    Formation avec plus grand nombre de participants :
+    {{ maxFormation }}
+</h4>
+{% set total = 0 %} 
+{% for i in formations %}
+    {% set total = total + i.nb_participants %}
+{% endfor %}
+<h4>Le nombre des participants est : {{ total }} </h4>
+{% if formations is empty %}
+    <h4>Le tableau formation est vide</h4>
+{% else %}
+    <h4>Le tableau formation n'est pas vide</h4>
+{% endif %}

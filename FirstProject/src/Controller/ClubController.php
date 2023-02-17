@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ClubController extends AbstractController
 {
+
     #[Route('/club', name: 'app_club')]
     public function index(): Response
     {
@@ -16,7 +17,7 @@ class ClubController extends AbstractController
         ]);
     }
 
-    #[Route('/club/get/{name}', name: 'app_club')]
+    #[Route('/club/get/{name}', name: 'app_club_detail')]
     public function getName($name): Response
     {
         return $this->render('club/detail.html.twig', [
@@ -24,7 +25,7 @@ class ClubController extends AbstractController
         ]);
     }
 
-    #[Route('/club/list', name: 'app_club')]
+    #[Route('/club/list', name: 'app_club_list')]
     public function list(): Response
     {
         $formations = array(
@@ -49,7 +50,6 @@ class ClubController extends AbstractController
             'date_fin'=>'14/06/2020',
             'nb_participants'=>12)
         );
-
         return $this->render('club/list.html.twig', [
             'formations' => $formations,
         ]);
