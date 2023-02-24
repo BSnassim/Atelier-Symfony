@@ -1,12 +1,15 @@
-<table border="0" width="100%">
+<table style="width:50%;" border="1" width="100%">
     <tr>
-        <td>id</td>
-        <td>Name</td>
+        <td>Classroom id</td>
+        <td>Classroom Name</td>
+        <td>Actions</td>
     </tr>
 {% for i in list %}
     <tr>
         <td>{{ i.id }}</td>
         <td>{{ i.Name }}</td>
+        <td><a href="{{ path('app_classroomRemove',{'id': i.id})}}">Delete</td>
     </tr>
 {% endfor %}
 </table>
+<a href="{{ path('app_classroomAdd  ')}}"><button>Add</button></a>

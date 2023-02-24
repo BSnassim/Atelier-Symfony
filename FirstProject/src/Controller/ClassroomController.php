@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Classroom;
+use App\Form\ClassroomType;
 
 class ClassroomController extends AbstractController
 {
@@ -35,7 +36,7 @@ class ClassroomController extends AbstractController
         $repository=$doctrine->getRepository(Classroom::class);
         $em=$doctrine->getManager();
         $classroom = new Classroom() ;  
-        $form = $this->createForm(AddClassroomType::class, $classroom) ;
+        $form = $this->createForm(ClassroomType::class, $classroom) ;
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
