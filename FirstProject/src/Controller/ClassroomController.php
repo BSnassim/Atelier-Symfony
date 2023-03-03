@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Classroom;
 use App\Form\ClassroomType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class ClassroomController extends AbstractController
 {
@@ -37,6 +38,7 @@ class ClassroomController extends AbstractController
         $em=$doctrine->getManager();
         $classroom = new Classroom() ;  
         $form = $this->createForm(ClassroomType::class, $classroom) ;
+        $form->add('Add', SubmitType::class);
         $form->handleRequest($request);
 
         if ($form->isSubmitted()) {
@@ -57,6 +59,33 @@ class ClassroomController extends AbstractController
         $em->flush();
         
         return $this->redirectToRoute('app_classroomList');
+    }
+
+    #[Route('/classroom/{id}', name: 'app_classroomShow')]
+    public function show(ManagerRegistry $doctrine, $id): Response
+    {
+        $repository = $doctrine->getRepository(classroom::class);
+        $show=  $repository->find($id);
+
+        return $this->render('classroom/show.html.twig', [
+            'show' => $show
+        ]);
+    }
+
+    #[Route('/classroom/{id}/update', name: 'app_classroomUpdate')]
+    public function update(Request $request,ManagerRegistry $doctrine, $id, Classroom $classroom) : Response
+    {
+        $repository=$doctrine->getRepository(Classroom::class);
+        $em=$doctrine->getManager(); 
+        $form = $this->createForm(ClassroomType::class, $classroom);
+        $form->add('Submit', SubmitType::class);
+        $form->handleRequest($request);
+        if ($form->isSubmitted()) {
+            $em->persist($classroom);
+            $em->flush();
+            return $this->redirectToRoute('app_classroomList');
+        }
+        return $this->renderForm('classroom/update.html.twig',array('formC' => $form));
     }
 
 }

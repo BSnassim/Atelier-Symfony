@@ -1,0 +1,37 @@
+		<h2>
+			Afficher Classroom details
+		</h2>
+
+		<h4>
+			ID :
+			{{show.id}}
+		</h4>
+
+		<h4>
+			Nom :
+			{{show.name}}
+		</h4>
+
+
+		<h4>
+			Students :
+		</h4>
+
+		{% for i in show.getStudents() %}
+
+			<h5>
+				NSC :
+				{{i.getNSC()}}
+				--- | ---
+				Email :
+				{{i.getEmail}}
+			</h5>
+
+
+		{% endfor %}
+
+		<form action={{ url('app_classroomList') }}>
+			<input type="submit" value="Liste des Classrooms"/>
+		</form>
+
+	</div>

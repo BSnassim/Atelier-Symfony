@@ -8,8 +8,10 @@
     <tr>
         <td>{{ i.id }}</td>
         <td>{{ i.Name }}</td>
-        <td><a href="{{ path('app_classroomRemove',{'id': i.id})}}">Delete</td>
+        <td><a href="{{ path('app_classroomRemove',{'id': i.id})}}">Delete
+        <a href="{{ path('app_classroomShow',{'id': i.id})}}">Show
+        <a href="{{ path('app_classroomUpdate',{'id': i.id})}}">Update</td>
     </tr>
 {% endfor %}
 </table>
-<a href="{{ path('app_classroomAdd  ')}}"><button>Add</button></a>
+<a href="{{ path('app_classroomAdd')}}"><button style="margin:10px">Add Classroom</button></a>

@@ -1,0 +1,24 @@
+<style>
+div{
+    font-size: 25px;
+}
+input{
+    width:150px;
+    height:30px;
+    margin:10px;
+    border:medium solid blue;
+    border-radius:10px;
+    background-color:cyan;
+}
+</style>
+<div>
+{{form_start(formC)}}
+{{form_label(formC.email)}}
+{{form_widget(formC.email)}}
+{{form_label(formC.classroom)}}
+{{form_widget(formC.classroom)}}
+{{form_widget(formC.Submit)}}
+{{form_end(formC)}}
+</div>
+
+<a href="{{ path('app_studentList')}}"><button>Back to list</button></a>

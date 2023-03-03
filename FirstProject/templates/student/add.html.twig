@@ -13,10 +13,12 @@ input{
 </style>
 <div>
 {{form_start(formA)}}
-{{form_label(formA.Name)}}
-{{form_widget(formA.Name)}}
-{{form_widget(formA.Add_classroom)}}
+{{form_label(formA.email)}}
+{{form_widget(formA.email)}}
+{{form_label(formA.classroom)}}
+{{form_widget(formA.classroom)}}
+{{form_widget(formA.Add)}}
 {{form_end(formA)}}
 </div>
 
-<a href="{{ path('app_classroomList')}}"><button>Back to list</button></a>
+<a href="{{ path('app_studentList')}}"><button>Back to list</button></a>

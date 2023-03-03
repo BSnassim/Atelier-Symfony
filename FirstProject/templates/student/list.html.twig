@@ -1,0 +1,19 @@
+<table style="width:50%;" border="1" width="100%">
+    <tr>
+        <td>Student nsc</td>
+        <td>Student Email</td>
+        <td>Classroom</td>
+        <td>Actions</td>
+    </tr>
+{% for i in list %}
+    <tr>
+        <td>{{ i.nsc }}</td>
+        <td>{{ i.Email }}</td>
+        <td>{{ i.Classroom.Name}}</td>
+        <td><a href="{{ path('app_studentRemove',{'id': i.nsc})}}">Delete
+        <a href="{{ path('app_studentShow',{'id': i.nsc})}}">Show
+        <a href="{{ path('app_studentUpdate',{'id': i.nsc})}}">Update</td>
+    </tr>
+{% endfor %}
+</table>
+<a href="{{ path('app_studentAdd')}}"><button style="margin:10px">Add Student</button></a>
