@@ -1,4 +1,4 @@
-{% for f in formations %}
+{# {% for f in formations %}
 <b>ref : </b>{{ f.ref }}<br>
 <b>Titre :</b> {{ f.Titre |upper}}<br>
 <b>Description :</b> {{ f.Description }}<br>
@@ -46,4 +46,24 @@
     <h4>Le tableau formation est vide</h4>
 {% else %}
     <h4>Le tableau formation n'est pas vide</h4>
-{% endif %}
+{% endif %} #}
+<table style="width:50%;" border="1" width="100%">
+    <tr>
+        <td>Club ref</td>
+        <td>Created At</td>
+        <td>Actions</td>
+    </tr>
+{% for i in list %}
+    <tr>
+        <td>{{ i.ref }}</td>
+        <td>{{ i.createdAt|date('Y-m-d') }}</td>
+        <td><a href="{{ path('app_clubRemove',{'id': i.ref})}}">Delete
+        <a href="{{ path('app_clubShow',{'id': i.ref})}}">Show
+        <a href="{{ path('app_clubUpdate',{'id': i.ref})}}">Update</td>
+    </tr>
+{% endfor %}
+</table>
+<a href="{{ path('app_clubAdd')}}"><button style="margin:10px">Add club</button></a>
+<a href="{{ path('app_studentList')}}"><button>Students list</button></a>
+<a href="{{ path('app_classroomList')}}"><button>Classrooms list</button></a>
+<a href="{{ path('app_clubList')}}"><button>Clubs list</button></a>

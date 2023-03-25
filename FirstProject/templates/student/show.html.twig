@@ -17,6 +17,19 @@
 			Classroom :
 			{{show.classroom.name}}
 		</h4>
+		<h4>
+			Clubs :
+		</h4>
+		
+		{% for i in show.getClub() %}
+		
+			<h5>
+				REF :
+				{{i.getRef()}}
+			</h5>
+		
+		
+		{% endfor %}
 
 		<form action={{ url('app_studentList') }}>
 			<input type="submit" value="Liste des Student"/>

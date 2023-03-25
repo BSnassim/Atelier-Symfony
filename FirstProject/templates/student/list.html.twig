@@ -1,19 +1,33 @@
+<form>
+    <label>NSC:</label>
+    <input type="text" name="nsc" />
+    <button>Search</button><br><br>
+</form>
 <table style="width:50%;" border="1" width="100%">
     <tr>
         <td>Student nsc</td>
         <td>Student Email</td>
         <td>Classroom</td>
+        <td>Clubs</td>
         <td>Actions</td>
     </tr>
-{% for i in list %}
+    {% for i in list %}
     <tr>
         <td>{{ i.nsc }}</td>
         <td>{{ i.Email }}</td>
         <td>{{ i.Classroom.Name}}</td>
-        <td><a href="{{ path('app_studentRemove',{'id': i.nsc})}}">Delete
-        <a href="{{ path('app_studentShow',{'id': i.nsc})}}">Show
-        <a href="{{ path('app_studentUpdate',{'id': i.nsc})}}">Update</td>
+        <td> {% for s in i.getClub() %}
+            <b>{{s.getRef()}} ||</b>
+            {% endfor %}
+        </td>
+        <td><a href="{{ path('app_studentRemove',{'id': i.nsc})}}">Delete</a>
+            <a href="{{ path('app_studentShow',{'id': i.nsc})}}">Show</a>
+            <a href="{{ path('app_studentUpdate',{'id': i.nsc})}}">Update</a>
+        </td>
     </tr>
-{% endfor %}
+    {% endfor %}
 </table>
 <a href="{{ path('app_studentAdd')}}"><button style="margin:10px">Add Student</button></a>
+<a href="{{ path('app_studentList')}}"><button>Students list</button></a>
+<a href="{{ path('app_classroomList')}}"><button>Classrooms list</button></a>
+<a href="{{ path('app_clubList')}}"><button>Clubs list</button></a>

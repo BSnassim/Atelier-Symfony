@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Student;
 use App\Form\StudentType;
+use App\Repository\StudentRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -40,13 +41,19 @@ class StudentController extends AbstractController
     }
 
     #[Route('/student/list', name: 'app_studentList')]
-    public function list(ManagerRegistry $doctrine): Response
+    public function list(StudentRepository $repository, $nsc = null): Response
     {
-        $repository=$doctrine->getRepository(Student::class);
-        $list= $repository->findAll();
-        return $this->render('student/list.html.twig', [
-            'list' => $list
-        ]);
+        if($nsc == null){
+            $list= $repository->findStudentsOrderByEmail();
+            return $this->render('student/list.html.twig', [
+                'list' => $list
+            ]);
+        } else{
+            $list= $repository->findStudentsByNSC($nsc);
+            return $this->render('student/list.html.twig', [
+                'list' => $list
+            ]);
+        }
     }
 
     #[Route('/student/remove/{id}', name: 'app_studentRemove')]
@@ -75,7 +82,6 @@ class StudentController extends AbstractController
     #[Route('/student/{id}/update', name: 'app_studentUpdate')]
     public function update(Request $request,ManagerRegistry $doctrine, $id, Student $student) : Response
     {
-        $repository=$doctrine->getRepository(Student::class);
         $em=$doctrine->getManager(); 
         $form = $this->createForm(StudentType::class, $student);
         $form->add('Submit', SubmitType::class);

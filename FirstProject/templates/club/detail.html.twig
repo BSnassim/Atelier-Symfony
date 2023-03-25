@@ -1,1 +1,37 @@
-Le nom de la formation selectionné est :{{name}}
+{# Le nom de la formation selectionné est :{{name}} #}
+<h2>
+    Detail de club
+</h2>
+
+<h4>
+    REF :
+    {{show.ref}}
+</h4>
+
+<h4>
+    Created At :
+    {{show.createdAt}}
+</h4>
+
+<h4>
+    Students :
+</h4>
+
+{% for i in show.getStudents() %}
+
+    <h5>
+        NSC :
+        {{i.getNSC()}}
+        --- | ---
+        Email :
+        {{i.getEmail}}
+    </h5>
+
+
+{% endfor %}
+
+<form action={{ url('app_clubList') }}>
+    <input type="submit" value="Liste des Clubs"/>
+</form>
+
+</div>
